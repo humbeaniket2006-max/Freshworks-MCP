@@ -1,14 +1,16 @@
 services:
   - type: web
     name: freshsales-mcp-server
-    env: node
+    runtime: node
     plan: free
-    buildCommand: npm ci && npm run build
+    buildCommand: npm install --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: "22"
       - key: FRESHSALES_API_KEY
         sync: false
       - key: FRESHSALES_DOMAIN
